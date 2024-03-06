@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multiregistration form</title>
+    <style>
+        body{
+            background-color:#f9a5ef;
+        }
+        .multiregisterform {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+        }
+
+        .form1{
+            margin: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            width: 30%;
+        }
+        .forms
+        {   
+            width: 100%;
+            display: flex;
+            
+        }
+         .status
+         {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+         p{
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+         }
+         #p1
+         {
+            background-color: rgb(141, 67, 137);
+            margin: 10px;
+         }
+         .line
+         {
+            height: 4px;
+            width: 200px;
+         }
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #form2
+        {
+            visibility: hidden;
+        }
+        #form3
+        {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 align="center">Multi-Registration Form</h1>
+    <div class="multiregisterform">
+        <div class="status">
+            <p id="p1">1</p>
+            <div class="line" id="line1"></div>
+            <p id="p2">2</p>
+            <div class="line" id="line2"></div>
+            <p id="p3">3</p>
+        </div>
+        <div class="forms">
+            <div class="form1" id="form11">
+                <h1>Form1</h1>
+                    <input type="text" id="email" />
+                    <input type="text" id="pwd" />
+                    <input type="text" id="repwd" />
+                    <button onclick="gotoNextForm()">Next</button>
+            </div>
+            <div class="form1" id="form2">
+                <h1>Form2</h1>
+               
+                    <input type="text" id="email1" />
+                    <input type="text" id="pwd1" />
+                    <input type="text" id="repwd1" />
+                    <button onclick="goprevForm()">Previous</button>
+                    <button onclick="gotoNextform1()">Next</button>
+               
+            </div>
+            <div class="form1" id="form3">
+                <h1>Form3</h1>
+              
+                    <input type="text" id="email2" />
+                    <input type="text" id="pwd2" />
+                    <input type="text" id="repwd2" />
+                    <button onclick="goPrevform2()">Previous</button>
+             
+            </div>
+        </div>
+    </div>
+    <script src="task.js"></script>
+</body>
+
+</html>

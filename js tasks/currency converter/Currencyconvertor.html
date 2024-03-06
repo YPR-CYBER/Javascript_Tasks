@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container
+        {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .totalcontainer
+        {
+            display: flex;
+            width:60%;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .container1
+        {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+  <h1 align="center">Currency Convertor</h1>  
+  <div class="container">
+    <div class="totalcontainer">
+    <div class="container1">
+       
+        <h2>From</h2>
+        <input type="number" id="fromval">
+        <select id="from">
+            <option>select</option>
+        </select>
+        
+    </div>
+    <div class="container1">
+        <h2>To</h2>
+        <input type="number" id="toval">
+        <select id="to">
+            <option>select</option>
+        </select>
+        
+    </div>
+</div>
+    <div class="container3">
+        <button onclick="currencyConverter()">Convert</button>
+    </div>
+  
+  </div>
+  <script src="task.js"></script>
+</body>
+</html>

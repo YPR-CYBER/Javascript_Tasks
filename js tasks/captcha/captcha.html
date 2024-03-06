@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- YouTube - CodingLab -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Captcha Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>Captcha Generator</header>
+      <div class="input_field captch_box">
+        <input type="text" value="" disabled />
+        <button class="refresh_button">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+      <div class="input_field captch_input">
+        <input type="text" placeholder="Enter captcha" />
+      </div>
+      <div class="message">Entered captcha is correct</div>
+      <div class="input_field button disabled">
+        <button>Submit Captcha</button>
+      </div>
+    </div>
+
+    <script >
+
+        // Select the DOM elements needed for this code
+const captchaTextBox = document.querySelector(".captch_box input"); // Textbox to display captcha
+const refreshButton = document.querySelector(".refresh_button"); // Refresh button
+const captchaInputBox = document.querySelector(".captch_input input"); // Input field for user to enter captcha
+const message = document.querySelector(".message"); // Message area to display the result of captcha validation
+const submitButton = document.querySelector(".button"); // Submit button
+
+// Variable to store the generated captcha
+let captchaText = null;
+
+// Function to generate captcha
+const generateCaptcha = () => {
+  // Generate a random string and convert it to a base-36 string
+  // Then, split it into an array, map over it to randomly capitalize each character
+  // And finally, join it back into a string with spaces between the characters
+  const randomString = Math.random().toString(36).substring(2, 7);
+  const randomStringArray = randomString.split("");
+  const changeString = randomStringArray.map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char));
+  captchaText = changeString.join(" ");
+  captchaTextBox.value = captchaText;
+  console.log(captchaText); // Log the generated captcha to the console for debugging
+};
+
+// Function to handle clicks on the refresh button
+const refreshBtnClick = () => {
+  generateCaptcha();
+  captchaInputBox.value = ""; // Clear the captcha input field when the captcha is refreshed
+  captchaKeyUpValidate();
+};
+
+// Function to validate the captcha input field and enable/disable the submit button accordingly
+const captchaKeyUpValidate = () => {
+  // Toggle the "disabled" class on the submit button based on the value of the captcha input field
+  submitButton.classList.toggle("disabled", !captchaInputBox.value);
+
+  if (!captchaInputBox.value) message.classList.remove("active"); // Remove the "active" class from the message area if the captcha input field is empty
+};
+
+// Function to handle clicks on the submit button and validate the captcha
+const submitBtnClick = () => {
+  // Remove any spaces from the generated captcha to make it easier to compare with the user input
+  captchaText = captchaText
+    .split("")
+    .filter((char) => char !== " ")
+    .join("");
+  message.classList.add("active"); // Add the "active" class to the message area to show the result of the captcha validation
+
+  // Compare the user input with the generated captcha
+  if (captchaInputBox.value === captchaText) {
+    message.innerText = "Entered captcha is correct";
+    message.style.color = "#826afb"; // Set the message color to purple if the captcha is correct
+  } else {
+    message.innerText = "Entered captcha is not correct";
+    message.style.color = "#FF2525"; // Set the message color to red if the captcha is incorrect
+  }
+};
+
+// Add event listeners for the refresh button, captcha input field, and submit button
+refreshButton.addEventListener("click", refreshBtnClick);
+captchaInputBox.addEventListener("keyup", captchaKeyUpValidate);
+submitButton.addEventListener("click", submitBtnClick);
+
+// Generate a captcha when the page loads
+generateCaptcha();
+    </script>
+  </body>
+</html>

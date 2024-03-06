@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Captcha Generator</title>
+    <style>
+      .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .active {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>Captcha Generator</header>
+      <input
+        type="text"
+        class="captcha"
+        readonly
+        onfocus="this.select();"
+      />
+      <button class="refresh_button">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+      <input type="text" class="captcha_input" oninput="validate()" />
+      <div class="message active">Entered captcha is correct</div>
+      <button class="button disabled" onclick="submit()">Submit Captcha</button>
+    </div>
+
+    <script>
+      // Select the DOM elements needed for this code
+      const captcha = document.querySelector(".captcha");
+      const refreshButton = document.querySelector(".refresh_button");
+      const captchaInput = document.querySelector(".captcha_input");
+      const message = document.querySelector(".message");
+      const submitButton = document.querySelector(".button");
+
+      // Generate a random captcha
+      const generateCaptcha = () => {
+        const randomString = Math.random().toString(36).substring(2, 7);
+        captcha.value = randomString.split("").map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char)).join(" ");
+      };
+
+      // Validate the captcha input field and enable/disable the submit button accordingly
+      const validate = () => {
+        submitButton.classList.toggle("disabled", captchaInput.value !== captcha.value);
+        message.classList.toggle("active", captchaInput.value !== captcha.value);
+      };
+
+      // Handle clicks on the submit button and validate the captcha
+      const submit = () => {
+        message.classList.add("active");
+        if (captchaInput.value === captcha.value) {
+          message.innerText = "Entered captcha is correct";
+          message.style.color = "green";
+        } else {
+          message.innerText = "Entered captcha is not correct";
+          message.style.color = "red";
+        }
+      };
+
+      // Add event listeners for the refresh button and captcha input field
+      refreshButton.addEventListener("click", generateCaptcha);
+      captchaInput.addEventListener("input", validate);
+
+      // Generate a captcha when the page loads
+      generateCaptcha();
+    </script>
+  </body>
+</html>
